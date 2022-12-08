@@ -20,8 +20,8 @@
   }
 
   .card {
-    background-color: theme("colors.white");
-    border-radius: theme("borderRadius.lg");
+    background-color: white;
+    border-radius: 8px;
     padding: theme("spacing.2");
     margin: 15px;
     width: 100%;
