@@ -18,7 +18,6 @@ export default function Home() {
           <text className='text-green-700'>Spotify</text> Data App
         </h1>
         <div className='artists-and-songs-container flex w-full flex-row justify-center'>
-          {" "}
           <TopArtists />
           <TopSongs />
         </div>

@@ -10,8 +10,8 @@ export default function TopArtists() {
         {testArtists.map((artist) => {
           return (
             <div key={artist} className='card flex flex-row text-black'>
-              <div className='align-center flex flex-col justify-center'>Image</div>
-              <div className='artist-info flex flex-grow flex-col justify-around'>
+              <div className='align-center m-3 flex flex-col justify-center'>Image</div>
+              <div className='artist-info flex flex-grow flex-col pt-5'>
                 <p className='genre text-black text-opacity-50'>Genre</p>
                 <p className='artist-name'>Artist {artist}</p>
               </div>
