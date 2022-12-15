@@ -27,9 +27,9 @@ export default function TopSongs() {
       <h1 className='text-center text-3xl'>Top Songs</h1>
       {topSongs.map((song) => {
         return (
-          <div key={song.name} className='card flex flex-row text-black'>
+          <div key={song.name} className='card flex flex-row text-sm text-black'>
             <div className='album-art align-center m-3 flex flex-col justify-center'>
-              <img src={song.album.images[2].url} />
+              <img src={song.album.images[2].url} width='64px' height='64px' />
             </div>
             <div className='song-info flex flex-grow flex-col pt-5'>
               <p className='artist'>{song.artists[0].name}</p>
