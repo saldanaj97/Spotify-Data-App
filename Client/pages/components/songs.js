@@ -1,25 +1,16 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { fetchTopSongs } from "../api/spotify_calls";
 
 export default function TopSongs() {
-  let testSongs = ["1", "2", "3", "4", "5"];
-
   const [topSongs, setTopSongs] = useState([]);
 
   useEffect(() => {
-    fetchTopSongs();
+    getTopSongs();
   }, setTopSongs);
 
-  const fetchTopSongs = async () => {
-    let token = window.localStorage.getItem("token");
-    if (token) {
-      let { data } = await axios.get("https://api.spotify.com/v1/me/top/tracks", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setTopSongs(data.items);
-    }
+  const getTopSongs = async () => {
+    let { items } = await fetchTopSongs();
+    setTopSongs(items);
   };
 
   return (
