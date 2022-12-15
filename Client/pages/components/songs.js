@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchTopSongs } from "../api/spotify_calls";
 
-export default function TopSongs() {
+export default function UsersTopSongs() {
   const [topSongs, setTopSongs] = useState([]);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function TopSongs() {
         return (
           <div key={song.name} className='card flex flex-row text-sm text-black'>
             <div className='album-art align-center m-3 flex flex-col justify-center'>
-              <img src={song.album.images[2].url} width='64px' height='64px' />
+              <img className='h-16 w-16' src={song.album.images[2].url} />
             </div>
             <div className='song-info flex flex-grow flex-col pt-5'>
               <p className='artist'>{song.artists[0].name}</p>
