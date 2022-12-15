@@ -5,6 +5,8 @@ import TopArtists from "./components/artists";
 import TopSongs from "./components/songs";
 
 export default function Home() {
+  const handleLoginClick = async () => {};
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,6 +19,18 @@ export default function Home() {
         <h1 className={styles.title}>
           <text className='text-green-700'>Spotify</text> Data App
         </h1>
+        <div className='login-button'>
+          <button
+            className='rounded border-b-4 border-green-700 bg-green-700 py-2 px-4 text-white hover:border-green-700 hover:bg-green-500'
+            onClick={handleLoginClick}
+          >
+            <a
+              href={`${process.env.AUTH_ENDPOINT}?client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}&response_type=${process.env.RESPONSE_TYPE}`}
+            >
+              Login to Spotify
+            </a>
+          </button>
+        </div>
         <div className='artists-and-songs-container flex w-full flex-row justify-center'>
           <TopArtists />
           <TopSongs />
