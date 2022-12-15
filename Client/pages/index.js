@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import TopArtists from "./components/artists";
-import TopSongs from "./components/songs";
+import UsersTopArtists from "./components/artists";
+import UsersTopSongs from "./components/songs";
 
 export default function Home() {
   const CLIENT_ID = process.env.CLIENT_ID;
@@ -67,8 +67,8 @@ export default function Home() {
           </button>
         </div>
         <div className='artists-and-songs-container flex w-full flex-row justify-center'>
-          <TopArtists />
-          <TopSongs />
+          <UsersTopArtists />
+          <UsersTopSongs />
         </div>
       </main>
 
