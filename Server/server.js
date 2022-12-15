@@ -1,13 +1,8 @@
 var express = require("express");
 var request = require("request");
 const dotenv = require("dotenv");
-var cors = require("cors");
 var querystring = require("querystring");
 var cookieParser = require("cookie-parser");
-
-var client_id = process.env.CLIENT_ID;
-var client_secret = process.env.CLIENT_SECRET;
-var redirect_uri = process.env.REDIRECT_URI;
 
 /**
  * Generates a random string containing numbers and letters
@@ -24,17 +19,40 @@ var generateRandomString = function (length) {
   return text;
 };
 
+// Express
 const app = express();
 const port = 3001;
+
+// Spotify app auth state and inclusion of .env vars
 var stateKey = "spotify_auth_state";
 dotenv.config();
 
+// Cors
+var cors = require("cors");
+const corsOptions = {
+  origin: ["*", "http://localhost:3000", "https://accounts.spotify.com"],
+  allowedHeaders: ["Origin", "X-Requested-With", "Content", "Accept", "Content-Type", "Authorization"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  credentials: true,
+};
+
 app
   .use(express.static(__dirname + "/public"))
-  .use(cors())
+  .use(cors(corsOptions))
   .use(cookieParser());
 
+// Login Route
 app.get("/login", function (req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  var client_id = process.env.CLIENT_ID;
+  var redirect_uri = process.env.REDIRECT_URI;
+
   var state = generateRandomString(16);
   var scope = "user-read-private user-read-email";
 
@@ -117,6 +135,10 @@ app.get("/callback", function (req, res) {
 
 // Request a refreshed Access Token
 app.get("/refresh_token", function (req, res) {
+  var client_id = process.env.CLIENT_ID;
+  var client_secret = process.env.CLIENT_SECRET;
+  var redirect_uri = process.env.REDIRECT_URI;
+
   // requesting access token from refresh token
   var refresh_token = req.query.refresh_token;
   var authOptions = {
