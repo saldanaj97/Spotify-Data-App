@@ -6,11 +6,11 @@ import UsersTopArtists from "./components/artists";
 import UsersTopSongs from "./components/songs";
 
 export default function Home() {
-  const CLIENT_ID = process.env.CLIENT_ID;
+  const CLIENT_ID = process.env.CLIENT_ID || "59a58a760351424a8e2dc5cd20ea82e7";
   const SCOPE = process.env.SCOPE || "user-top-read";
   const REDIRECT_URI = process.env.REDIRECT_URI || "http://localhost:3000";
   const AUTH_ENDPOINT = process.env.AUTH_ENDPOINT || "https://accounts.spotify.com/authorize";
-  const RESPONSE_TYPE = process.env.RESPONSE_TYPE;
+  const RESPONSE_TYPE = process.env.RESPONSE_TYPE || "token";
 
   const [token, setToken] = useState("");
 
@@ -55,20 +55,30 @@ export default function Home() {
         <h1 className={styles.title}>
           <text className='text-green-700'>Spotify</text> Data App
         </h1>
-        <div className='login-button'>
-          <button className='rounded border-b-4 border-green-700 bg-green-700 py-2 px-4 text-white hover:border-green-700 hover:bg-green-500'>
-            {!token ? (
+        <div className='users-favorites-data'>
+          {!token ? (
+            <button className='rounded border-b-4 border-green-700 bg-green-700 py-2 px-4 text-white hover:border-green-700 hover:bg-green-500'>
               <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&scope=${SCOPE}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>
                 Login to Spotify
               </a>
-            ) : (
-              <button onClick={logout}>Logout</button>
-            )}
-          </button>
-        </div>
-        <div className='artists-and-songs-container flex w-full flex-row justify-center'>
-          <UsersTopArtists />
-          <UsersTopSongs />
+            </button>
+          ) : (
+            <div className='flex flex-col justify-center'>
+              <div className='logout-button flex flex-row justify-center'>
+                <button
+                  className='w-1/6 rounded border-b-4 border-green-700 bg-green-700 py-2 px-4 text-white hover:border-green-700 hover:bg-green-500'
+                  onClick={logout}
+                >
+                  Logout
+                </button>
+              </div>
+              <div className='artists-and-songs-container flex w-full flex-row justify-center'>
+                {" "}
+                <UsersTopArtists />
+                <UsersTopSongs />
+              </div>
+            </div>
+          )}
         </div>
       </main>
 

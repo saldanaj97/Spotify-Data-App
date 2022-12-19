@@ -2,7 +2,6 @@ import axios from "axios";
 
 /**
  * Fetches the users top 20 played songs
- * @param  {N/A} N/A
  * @return {object} data object containing information about the users top played songs
  */
 export const fetchTopSongs = async () => {
@@ -19,7 +18,7 @@ export const fetchTopSongs = async () => {
 
 /**
  * Fetches the users top 20 artists
- * @param  {N/A} N/A
+ * @param  {} none
  * @return {object} data object containing information about the users top artists
  */
 export const fetchTopArtists = async () => {
