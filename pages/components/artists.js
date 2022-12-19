@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { fetchTopArtists } from "../api/spotify_calls";
+import TimePeriodDropdownMenu from "./dropdown-menu";
 
 export default function UsersTopArtists() {
-  let [topArtists, setTopArtists] = useState([]);
+  const [topArtists, setTopArtists] = useState([]);
+  const [timePeriod, setTimePeriod] = useState("all-time");
 
   useEffect(() => {
     getTopArtists();
@@ -26,7 +28,7 @@ export default function UsersTopArtists() {
 
   return (
     <div className='top-artists-container mx-20 w-80 flex-col justify-evenly'>
-      <h1 className='text-center text-3xl'>Top Artists</h1>
+      <h1 className='text-center text-3xl'>Top Artists {TimePeriodDropdownMenu({ timePeriod: timePeriod, setTimePeriod: setTimePeriod })}</h1>
       <div className='top-artists-list flex flex-col justify-evenly'>
         {topArtists.map((artist) => {
           return (

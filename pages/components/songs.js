@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { fetchTopSongs } from "../api/spotify_calls";
+import TimePeriodDropdownMenu from "./dropdown-menu";
 
 export default function UsersTopSongs() {
   const [topSongs, setTopSongs] = useState([]);
+  const [timePeriod, setTimePeriod] = useState("all-time");
 
   useEffect(() => {
     getTopSongs();
@@ -15,7 +17,7 @@ export default function UsersTopSongs() {
 
   return (
     <div className='top-songs-container mx-20 w-80 flex-col justify-evenly'>
-      <h1 className='text-center text-3xl'>Top Songs</h1>
+      <h1 className='text-center text-3xl'>Top Songs {TimePeriodDropdownMenu({ timePeriod: timePeriod, setTimePeriod: setTimePeriod })}</h1>
       <div className='top-songs-list flex flex-col justify-evenly'>
         {topSongs.map((song) => {
           return (
@@ -26,8 +28,6 @@ export default function UsersTopSongs() {
                 <p className='album-name'>{song.album.name}</p>
                 <p className='song-name '>{song.name}</p>
               </div>
-              {/*             <div className='user-num-saved-songs flex flex-col justify-end '> {song.popularity}</div>
-               */}
             </div>
           );
         })}

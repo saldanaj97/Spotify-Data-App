@@ -73,7 +73,6 @@ export default function Home() {
                 </button>
               </div>
               <div className='artists-and-songs-container flex w-full flex-row justify-center'>
-                {" "}
                 <UsersTopArtists />
                 <UsersTopSongs />
               </div>
