@@ -6,18 +6,23 @@ export default function UsersTopSongs() {
   const [topSongs, setTopSongs] = useState([]);
   const [timePeriod, setTimePeriod] = useState("all-time");
 
+  // The only terms that work with the spotify web api
+  const timePeriodTerms = { "all-time": "long_term", "6 months": "medium_term", "4 weeks": "short_term" };
+
   useEffect(() => {
     getTopSongs();
   }, setTopSongs);
 
   const getTopSongs = async () => {
-    let { items } = await fetchTopSongs();
+    let { items } = await fetchTopSongs(timePeriodTerms[timePeriod]);
     setTopSongs(items);
   };
 
   return (
     <div className='top-songs-container mx-20 w-80 flex-col justify-evenly'>
-      <h1 className='text-center text-3xl'>Top Songs {TimePeriodDropdownMenu({ timePeriod: timePeriod, setTimePeriod: setTimePeriod })}</h1>
+      <h1 className='text-center text-3xl'>
+        Top Songs {TimePeriodDropdownMenu({ timePeriod: timePeriod, setTimePeriod: setTimePeriod, resetUsersTopList: getTopSongs })}
+      </h1>
       <div className='top-songs-list flex flex-col justify-evenly'>
         {topSongs.map((song) => {
           return (

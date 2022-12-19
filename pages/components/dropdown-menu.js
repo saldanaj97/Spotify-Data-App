@@ -6,7 +6,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function TimePeriodDropdownMenu({ timePeriod, setTimePeriod }) {
+export default function TimePeriodDropdownMenu({ timePeriod, setTimePeriod, resetUsersTopList }) {
   return (
     <Menu as='div' className='relative inline-block text-left'>
       <div>
@@ -30,7 +30,10 @@ export default function TimePeriodDropdownMenu({ timePeriod, setTimePeriod }) {
             <Menu.Item>
               {({ active }) => (
                 <button
-                  onClick={() => setTimePeriod("all-time")}
+                  onClick={() => {
+                    setTimePeriod("all-time");
+                    resetUsersTopList();
+                  }}
                   className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm")}
                 >
                   all time
@@ -40,7 +43,10 @@ export default function TimePeriodDropdownMenu({ timePeriod, setTimePeriod }) {
             <Menu.Item>
               {({ active }) => (
                 <button
-                  onClick={() => setTimePeriod("4 weeks")}
+                  onClick={() => {
+                    setTimePeriod("4 weeks");
+                    resetUsersTopList();
+                  }}
                   className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm")}
                 >
                   4 weeks
@@ -50,7 +56,10 @@ export default function TimePeriodDropdownMenu({ timePeriod, setTimePeriod }) {
             <Menu.Item>
               {({ active }) => (
                 <button
-                  onClick={() => setTimePeriod("6 months")}
+                  onClick={() => {
+                    setTimePeriod("6 months");
+                    resetUsersTopList([]);
+                  }}
                   className={classNames(active ? "bg-gray-100 text-gray-900" : "text-gray-700", "block px-4 py-2 text-sm")}
                 >
                   6 months

@@ -6,12 +6,15 @@ export default function UsersTopArtists() {
   const [topArtists, setTopArtists] = useState([]);
   const [timePeriod, setTimePeriod] = useState("all-time");
 
+  // The only terms that work with the spotify web api
+  const timePeriodTerms = { "all-time": "long_term", "6 months": "medium_term", "4 weeks": "short_term" };
+
   useEffect(() => {
     getTopArtists();
   }, setTopArtists);
 
   const getTopArtists = async () => {
-    let { items } = await fetchTopArtists();
+    let { items } = await fetchTopArtists(timePeriodTerms[timePeriod]);
     setTopArtists(items);
   };
 
@@ -28,7 +31,9 @@ export default function UsersTopArtists() {
 
   return (
     <div className='top-artists-container mx-20 w-80 flex-col justify-evenly'>
-      <h1 className='text-center text-3xl'>Top Artists {TimePeriodDropdownMenu({ timePeriod: timePeriod, setTimePeriod: setTimePeriod })}</h1>
+      <h1 className='text-center text-3xl'>
+        Top Artists {TimePeriodDropdownMenu({ timePeriod: timePeriod, setTimePeriod: setTimePeriod, resetUsersTopList: getTopArtists })}
+      </h1>
       <div className='top-artists-list flex flex-col justify-evenly'>
         {topArtists.map((artist) => {
           return (
