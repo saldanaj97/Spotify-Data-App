@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
-import { fetchTopArtists } from "../api/spotify_calls";
-import TimePeriodDropdownMenu from "./dropdownMenu";
+import { fetchTopArtists } from "../../api/spotify_calls";
+import TimePeriodDropdownMenu from "../dropdownMenu";
 import ArtistCard from "./artistCard";
 
 // The only terms that work with the spotify web api

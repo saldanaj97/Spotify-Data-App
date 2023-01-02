@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
-import { fetchTopSongs } from "../api/spotify_calls";
-import TimePeriodDropdownMenu from "./dropdownMenu";
+import { fetchTopSongs } from "../../api/spotify_calls";
+import TimePeriodDropdownMenu from "../dropdownMenu";
 
 export default function UsersTopSongs() {
   const [topSongs, setTopSongs] = useState([]);

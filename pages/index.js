@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import UsersTopArtists from "./components/artists";
-import UsersTopSongs from "./components/songs";
+import UsersTopArtists from "./components/Artists/artists";
+import UsersTopSongs from "./components/Songs/songs";
 
 export default function Home() {
   const CLIENT_ID = process.env.CLIENT_ID || "59a58a760351424a8e2dc5cd20ea82e7";
