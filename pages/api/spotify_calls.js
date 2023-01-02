@@ -1,4 +1,5 @@
 import axios from "axios";
+import { check } from "prettier";
 
 /**
  * Fetches the users top 20 played songs
@@ -8,7 +9,10 @@ import axios from "axios";
 export const fetchTopSongs = async (timePeriod) => {
   // The users auth token
   const TOKEN = window.localStorage.getItem("token");
-  if (TOKEN) {
+  try {
+    if (!TOKEN) {
+      throw error("No user api token found");
+    }
     let { data } = await axios.get("https://api.spotify.com/v1/me/top/tracks", {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
@@ -18,6 +22,8 @@ export const fetchTopSongs = async (timePeriod) => {
       },
     });
     return data;
+  } catch (error) {
+    return { message: "fetchTopArtists failed", error: error };
   }
 };
 
@@ -27,9 +33,11 @@ export const fetchTopSongs = async (timePeriod) => {
  * @return object containing information about the users top artists
  */
 export const fetchTopArtists = async (timePeriod) => {
-  // The users auth token
   const TOKEN = window.localStorage.getItem("token");
-  if (TOKEN) {
+  try {
+    if (!TOKEN) {
+      throw error("No user api token found");
+    }
     let { data } = await axios.get("https://api.spotify.com/v1/me/top/artists", {
       headers: {
         Authorization: `Bearer ${TOKEN}`,
@@ -39,5 +47,7 @@ export const fetchTopArtists = async (timePeriod) => {
       },
     });
     return data;
+  } catch (error) {
+    return { message: "fetchTopArtists failed", error: error };
   }
 };
