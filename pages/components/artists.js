@@ -1,34 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import { fetchTopArtists } from "../api/spotify_calls";
-import TimePeriodDropdownMenu from "./dropdown-menu";
+import TimePeriodDropdownMenu from "./dropdownMenu";
+import ArtistCard from "./artistCard";
+
+// The only terms that work with the spotify web api
+const timePeriodTerms = { "all-time": "long_term", "6 months": "medium_term", "4 weeks": "short_term" };
 
 export default function UsersTopArtists() {
   const [topArtists, setTopArtists] = useState([]);
   const [numOfArtists, setNumOfArtists] = useState(5);
   const [timePeriod, setTimePeriod] = useState("all-time");
 
-  // The only terms that work with the spotify web api
-  const timePeriodTerms = { "all-time": "long_term", "6 months": "medium_term", "4 weeks": "short_term" };
-
   useEffect(() => {
     getTopArtists(timePeriod);
   }, [setTopArtists]);
 
+  // Function to fetch the users top artists based on the time period selected in the dropdown
   const getTopArtists = async (period) => {
     let { items } = await fetchTopArtists(timePeriodTerms[period]);
     setTopArtists(items);
-  };
-
-  // Function to capitalize the first letter of each word
-  const convertCasing = (word) => {
-    let splitWord = word.split(" ");
-    let newWord = "";
-
-    splitWord.forEach((word) => {
-      newWord += word.charAt(0).toUpperCase() + word.slice(1) + " ";
-    });
-    return newWord;
   };
 
   return (
@@ -38,15 +29,7 @@ export default function UsersTopArtists() {
       </h1>
       <div className='top-artists-list flex flex-col justify-evenly'>
         {topArtists.slice(0, numOfArtists).map((artist) => {
-          return (
-            <div key={artist.name} className='card flex flex-row text-black'>
-              <img className='align-center m-3 h-16 w-16' src={artist.images[0].url} />
-              <div className='artist-info flex flex-grow flex-col pt-5'>
-                <p className='genre text-black text-opacity-50'>{convertCasing(artist.genres[0])}</p>
-                <p className='artist-name'>{artist.name}</p>
-              </div>
-            </div>
-          );
+          return <ArtistCard artist={artist} />;
         })}
         {numOfArtists === 20 ? (
           <div className='less-artists-button flex flex-row justify-center'>
