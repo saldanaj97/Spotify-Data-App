@@ -22,10 +22,10 @@ export default function ArtistInfoModal({ showModal, setShowModal, artist, artis
               <div className='relative flex w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none'>
                 {/*header*/}
                 <div className='flex flex-row items-start justify-between rounded-t border-b border-solid border-slate-200 p-5'>
-                  <img className='align-center m-3' src={artist.images[1].url} />
+                  <img className='align-center mx-3 my-2' src={artist.images[1].url} />
                   <div className='genre-list flex flex-col'>
-                    <h3 className='mb-2 w-max text-3xl font-semibold text-black'>{artist.name}</h3>
-                    <div className='flex flex-row flex-wrap '>
+                    <h3 className='mb-3 ml-3 w-max text-4xl font-bold text-black'>{artist.name}</h3>
+                    <div className='mx-3 flex flex-row flex-wrap'>
                       {artist.genres.map((genre) => {
                         return (
                           <div className='genre-pill-container mr-1 mb-1 w-auto rounded-3xl bg-green-700 px-2 py-1 text-sm text-white'>
@@ -33,6 +33,12 @@ export default function ArtistInfoModal({ showModal, setShowModal, artist, artis
                           </div>
                         );
                       })}
+                    </div>
+                    <div className='relative flex-auto px-3'>
+                      <p className='text-md my-2 text-left text-slate-500'>{artistDetails.artist.bio.summary.split(/(<a\s)\w+(=)/g)[0]}</p>
+                      <div className='text-sm opacity-50'>
+                        Source: <a href={artistDetails.artist.url}>{artistDetails.artist.url}</a>
+                      </div>
                     </div>
                   </div>
                   <button
@@ -45,12 +51,7 @@ export default function ArtistInfoModal({ showModal, setShowModal, artist, artis
                   </button>
                 </div>
                 {/*body*/}
-                <div className='relative flex-auto px-5 py-2'>
-                  <p className='my-2 text-lg leading-relaxed text-slate-500'>{artistDetails.artist.bio.summary.split(/(<a\s)\w+(=)/g)[0]}</p>
-                  <div className='text-sm opacity-50'>
-                    Source: <a href={artistDetails.artist.url}>{artistDetails.artist.url}</a>
-                  </div>
-                </div>
+                <div className='relative flex-auto px-5 py-2'>Discography</div>
                 {/*footer*/}
                 <div className='flex items-center justify-end rounded-b border-t border-solid border-slate-200 p-6'>
                   <button

@@ -17,10 +17,6 @@ export default function ArtistCard({ artist }) {
   const [showModal, setShowModal] = useState(false);
   const [artistDetails, setArtistDetails] = useState({});
 
-  /*   useEffect(() => {
-    getArtistInfo(artist.name);
-  }, [artist]); */
-
   // Function to change the state of the showModal var which displays/hides the modal
   const getArtistInfo = async (artistName) => {
     let { success, artistInfo } = await fetchArtistInfo(artistName);
