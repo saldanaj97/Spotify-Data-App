@@ -57,9 +57,9 @@ export const fetchTopArtists = async (timePeriod) => {
  * @return object containing information about the artist and a success bool
  */
 export const fetchArtistInfo = async (artist) => {
-  let url = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist.name}&api_key=039f408b5ec46293e3f253e7f174e138&format=json`;
+  let url = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artist}&api_key=039f408b5ec46293e3f253e7f174e138&format=json`;
   try {
-    let artistInfo = axios.get(url);
+    let artistInfo = await axios.get(url);
     return { success: true, artistInfo };
   } catch (error) {
     return { success: false, location: "fetchArtistInfo", error: error.message };
