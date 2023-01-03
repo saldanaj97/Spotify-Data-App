@@ -16,8 +16,40 @@ export default function UsersTopSongs() {
   }, [setTopSongs, numOfSongs]);
 
   const getTopSongs = async (period) => {
-    let { items } = await fetchTopSongs(timePeriodTerms[period]);
-    setTopSongs(items);
+    let { success, data } = await fetchTopSongs(timePeriodTerms[period]);
+    if (success) {
+      setTopSongs(data.items);
+    }
+  };
+
+  const LessSongs = () => {
+    return (
+      <div className='less-songs-button flex flex-row justify-center'>
+        <button
+          onClick={() => {
+            let updatedNumberOfSongs = 5;
+            setNumOfSongs(updatedNumberOfSongs);
+          }}
+        >
+          <ChevronUpIcon className='h-8 w-8' />
+        </button>
+      </div>
+    );
+  };
+
+  const MoreSongs = () => {
+    return (
+      <div className='more-songs-button flex flex-row justify-center'>
+        <button
+          onClick={() => {
+            let updatedNumOfSongs = numOfSongs + 5;
+            setNumOfSongs(updatedNumOfSongs);
+          }}
+        >
+          <ChevronDownIcon className='h-8 w-8' />
+        </button>
+      </div>
+    );
   };
 
   return (
@@ -25,41 +57,25 @@ export default function UsersTopSongs() {
       <h1 className='text-center text-3xl'>
         Top Songs {TimePeriodDropdownMenu({ timePeriod: timePeriod, setTimePeriod: setTimePeriod, resetUsersTopList: getTopSongs })}
       </h1>
-      <div className='top-songs-list flex flex-col justify-evenly'>
-        {topSongs.slice(0, numOfSongs).map((song) => {
-          return (
-            <div key={song.name} className='card flex flex-row text-sm text-black'>
-              <img className='align-center m-3 h-16 w-16' src={song.album.images[2].url} />
-              <div className='song-info flex flex-grow flex-col pt-5'>
-                <p className='artist'>{song.artists[0].name}</p>
-                <p className='album-name'>{song.album.name}</p>
-                <p className='song-name '>{song.name}</p>
-              </div>
-            </div>
-          );
-        })}
-        {numOfSongs === 20 ? (
-          <div className='less-songs-button flex flex-row justify-center'>
-            <button
-              onClick={() => {
-                let updatedNumberOfSongs = 5;
-                setNumOfSongs(updatedNumberOfSongs);
-              }}
-            >
-              <ChevronUpIcon className='h-8 w-8' />
-            </button>
+      <div className='top-songs-list '>
+        {topSongs.length > 0 ? (
+          <div className='flex flex-col justify-evenly'>
+            {topSongs.slice(0, numOfSongs).map((song) => {
+              return (
+                <div key={song.name} className='card flex flex-row text-sm text-black'>
+                  <img className='align-center m-3 h-16 w-16' src={song.album.images[2].url} />
+                  <div className='song-info flex flex-grow flex-col pt-5'>
+                    <p className='artist'>{song.artists[0].name}</p>
+                    <p className='album-name'>{song.album.name}</p>
+                    <p className='song-name '>{song.name}</p>
+                  </div>
+                </div>
+              );
+            })}
+            <div> {numOfSongs === 20 ? <LessSongs /> : <MoreSongs />}</div>
           </div>
         ) : (
-          <div className='more-songs-button flex flex-row justify-center'>
-            <button
-              onClick={() => {
-                let updatedNumOfSongs = numOfSongs + 5;
-                setNumOfSongs(updatedNumOfSongs);
-              }}
-            >
-              <ChevronDownIcon className='h-8 w-8' />
-            </button>
-          </div>
+          <div className='text-center'>No Songs</div>
         )}
       </div>
     </div>

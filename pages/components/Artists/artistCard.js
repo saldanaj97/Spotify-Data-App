@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { fetchArtistInfo } from "../../api/spotify_calls";
 import ArtistInfoModal from "./artistModal";
 
 // Function to capitalize the first letter of each word
@@ -14,10 +15,12 @@ const convertCasing = (word) => {
 
 export default function ArtistCard({ artist }) {
   const [showModal, setShowModal] = useState(false);
+  const [artistDetails, setArtistDetails] = useState({});
 
   // Function to change the state of the showModal var which displays/hides the modal
-  const getArtistInfo = () => {
-    setShowModal(true);
+  const getArtistInfo = async (artistName) => {
+    let { success, artistInfo } = await fetchArtistInfo(artistName);
+    if (success) setArtistDetails(artistInfo);
   };
 
   return (
@@ -27,8 +30,16 @@ export default function ArtistCard({ artist }) {
         <p className='genre text-black text-opacity-50'>{convertCasing(artist.genres[0])}</p>
         <p className='artist-name'>{artist.name}</p>
       </div>
-      <button onClick={getArtistInfo}>More Info</button>
-      <ArtistInfoModal showModal={showModal} artist={artist} setShowModal={setShowModal} />
+      <button
+        onClick={() => {
+          getArtistInfo(artist.name);
+          setShowModal(true);
+        }}
+      >
+        More Info
+      </button>
+
+      <ArtistInfoModal showModal={showModal} artist={artist} setShowModal={setShowModal} artistDetails={artistDetails} />
     </div>
   );
 }
