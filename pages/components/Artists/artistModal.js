@@ -24,7 +24,7 @@ export default function ArtistInfoModal({ showModal, setShowModal, artist, artis
                 <div className='flex flex-row items-start justify-between rounded-t border-b border-solid border-slate-200 p-5'>
                   <img className='align-center m-3' src={artist.images[1].url} />
                   <div className='genre-list flex flex-col'>
-                    <h3 className='mb-2 text-3xl font-semibold text-black'>{artist.name}</h3>
+                    <h3 className='mb-2 w-max text-3xl font-semibold text-black'>{artist.name}</h3>
                     <div className='flex flex-row flex-wrap '>
                       {artist.genres.map((genre) => {
                         return (
