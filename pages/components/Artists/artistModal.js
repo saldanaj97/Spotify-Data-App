@@ -47,6 +47,9 @@ export default function ArtistInfoModal({ showModal, setShowModal, artist, artis
                 {/*body*/}
                 <div className='relative flex-auto px-5 py-2'>
                   <p className='my-2 text-lg leading-relaxed text-slate-500'>{artistDetails.artist.bio.summary.split(/(<a\s)\w+(=)/g)[0]}</p>
+                  <div className='text-sm opacity-50'>
+                    Source: <a href={artistDetails.artist.url}>{artistDetails.artist.url}</a>
+                  </div>
                 </div>
                 {/*footer*/}
                 <div className='flex items-center justify-end rounded-b border-t border-solid border-slate-200 p-6'>
