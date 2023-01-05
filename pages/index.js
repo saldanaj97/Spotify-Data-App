@@ -22,7 +22,7 @@ export default function Home() {
   // Function to check if a token already exists for user
   const checkForToken = () => {
     const hash = window.location.hash;
-    let token = window.localStorage.getItem("token");
+    let token = window.sessionStorage.getItem("spotify-token");
     if (!token && hash) {
       token = hash
         .substring(1)
@@ -31,7 +31,7 @@ export default function Home() {
         .split("=")[1];
 
       window.location.hash = "";
-      window.localStorage.setItem("token", token);
+      window.sessionStorage.setItem("spotify-token", token);
     }
 
     setToken(token);
