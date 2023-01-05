@@ -7,7 +7,7 @@ import UsersTopSongs from "./components/Songs/songs";
 
 export default function Home() {
   const CLIENT_ID = process.env.CLIENT_ID || "59a58a760351424a8e2dc5cd20ea82e7";
-  const SCOPE = process.env.SCOPE || "user-top-read";
+  const SCOPE = process.env.SCOPE || "user-top-read user-read-private";
   const REDIRECT_URI = process.env.REDIRECT_URI || "http://localhost:3000";
   const AUTH_ENDPOINT = process.env.AUTH_ENDPOINT || "https://accounts.spotify.com/authorize";
   const RESPONSE_TYPE = process.env.RESPONSE_TYPE || "token";
