@@ -7,7 +7,7 @@ import axios from "axios";
  */
 export const fetchTopSongs = async (timePeriod) => {
   // The users auth token
-  const TOKEN = window.localStorage.getItem("token");
+  const TOKEN = window.sessionStorage.getItem("spotify-token");
   try {
     if (!TOKEN) {
       throw error("No user api token found");
@@ -32,7 +32,7 @@ export const fetchTopSongs = async (timePeriod) => {
  * @return object containing information about the users top artists and a success bool
  */
 export const fetchTopArtists = async (timePeriod) => {
-  const TOKEN = window.localStorage.getItem("token");
+  const TOKEN = window.sessionStorage.getItem("spotify-token");
   try {
     if (!TOKEN) {
       throw error("No user api token found");
