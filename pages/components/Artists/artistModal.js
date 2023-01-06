@@ -54,6 +54,7 @@ export default function ArtistInfoModal({ showModal, setShowModal, artist, artis
       </button>
     );
   };
+
   // Button that will allow the user to go to the artists spotify page
   const ViewOnSpotifyButton = () => {
     return (
@@ -73,11 +74,11 @@ export default function ArtistInfoModal({ showModal, setShowModal, artist, artis
   return (
     <>
       {showModal ? (
-        <div className='fixed inset-0 z-50 flex cursor-default items-center justify-center overflow-y-auto overflow-x-hidden outline-none focus:outline-none'>
+        <div className='fixed inset-0 z-50 flex cursor-default items-center justify-center overflow-y-auto overflow-x-hidden pt-32 outline-none focus:outline-none'>
           <div className='relative my-6 mx-auto w-auto max-w-3xl'>
             <div className='relative flex w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none'>
               <div className='flex flex-row items-start justify-between rounded-t border-b border-solid border-slate-200 p-5'>
-                <div className='flex w-2/3 flex-col'>
+                <div className='flex w-1/3 flex-col'>
                   <img className='align-center mx-3 my-2' src={artist.images[1].url} />
                   <GenrePills />
                 </div>
@@ -87,7 +88,7 @@ export default function ArtistInfoModal({ showModal, setShowModal, artist, artis
                 <CloseModalButton />
               </div>
               <ArtistInfo artist={artist} />
-              <div className='flex items-center justify-end rounded-b border-t border-solid border-slate-200 p-6'>
+              <div className='flex items-center justify-end rounded-b border-t border-solid border-slate-200 p-3'>
                 <ViewOnSpotifyButton />
               </div>
             </div>
