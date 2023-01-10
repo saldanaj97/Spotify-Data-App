@@ -27,19 +27,21 @@ export default function ArtistCard({ artist }) {
   };
 
   return (
-    <button
-      onClick={() => {
-        getArtistInfo(artist.name);
-      }}
-    >
-      <div key={artist.name} className='card flex flex-row text-black'>
-        <img className='align-center m-3 h-16 w-16' src={artist.images[0].url} />
-        <div className='artist-info flex flex-grow flex-col pt-5 text-left'>
-          <p className='genre text-black text-opacity-50'>{convertCasing(artist.genres[0])}</p>
-          <p className='artist-name'>{artist.name}</p>
+    <div className='card text-black'>
+      <button
+        onClick={() => {
+          getArtistInfo(artist.name);
+        }}
+      >
+        <div key={artist.name} className='flex flex-row'>
+          <img className='align-center m-3 h-16 w-16' src={artist.images[0].url} />
+          <div className='artist-info flex flex-grow flex-col pt-5 text-left'>
+            <p className='genre text-black text-opacity-50'>{convertCasing(artist.genres[0])}</p>
+            <p className='artist-name'>{artist.name}</p>
+          </div>
         </div>
-        <ArtistInfoModal showModal={showModal} artist={artist} setShowModal={setShowModal} artistDetails={artistDetails} />
-      </div>
-    </button>
+      </button>
+      <ArtistInfoModal showModal={showModal} artist={artist} setShowModal={setShowModal} artistDetails={artistDetails} />
+    </div>
   );
 }

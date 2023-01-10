@@ -63,7 +63,7 @@ export default function UsersTopArtists() {
         {topArtists.length > 0 ? (
           <div className='flex flex-col justify-evenly'>
             {topArtists.slice(0, numOfArtists).map((artist) => {
-              return <ArtistCard artist={artist} />;
+              return <ArtistCard artist={artist} key={artist.name} />;
             })}
             <div> {numOfArtists === 20 ? <LessArtists /> : <MoreArtists />}</div>
           </div>

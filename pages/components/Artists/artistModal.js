@@ -1,5 +1,6 @@
 import React from "react";
-import ArtistInfo from "./artistInfo";
+import TopArtists from "./artistTopSongs";
+import RelatedArtists from "./relatedArtists";
 
 // Function to capitalize the first letter of each word
 const convertCasing = (word) => {
@@ -19,7 +20,9 @@ export default function ArtistInfoModal({ showModal, setShowModal, artist, artis
       <div className='mx-3 mt-1 flex flex-row flex-wrap justify-center'>
         {artist.genres.map((genre) => {
           return (
-            <div className='genre-pill-container mr-1 mb-1 w-auto rounded-3xl bg-green-700 px-2 py-1 text-sm text-white'>{convertCasing(genre)}</div>
+            <div key={genre} className='genre-pill-container mr-1 mb-1 w-auto rounded-3xl bg-green-700 px-2 py-1 text-sm text-white'>
+              {convertCasing(genre)}
+            </div>
           );
         })}
       </div>
@@ -74,8 +77,8 @@ export default function ArtistInfoModal({ showModal, setShowModal, artist, artis
   return (
     <>
       {showModal ? (
-        <div className='fixed inset-0 z-50 flex cursor-default items-center justify-center overflow-y-auto overflow-x-hidden pt-32 outline-none focus:outline-none'>
-          <div className='relative my-6 mx-auto w-auto max-w-3xl'>
+        <div className='fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden pt-48 outline-none focus:outline-none'>
+          <div className='relative my-6 mx-auto w-auto max-w-4xl'>
             <div className='relative flex w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none'>
               <div className='flex flex-row items-start justify-between rounded-t border-b border-solid border-slate-200 p-5'>
                 <div className='flex w-1/3 flex-col'>
@@ -87,7 +90,8 @@ export default function ArtistInfoModal({ showModal, setShowModal, artist, artis
                 </div>
                 <CloseModalButton />
               </div>
-              <ArtistInfo artist={artist} />
+              <TopArtists artist={artist} />
+              <RelatedArtists artist={artist} />
               <div className='flex items-center justify-end rounded-b border-t border-solid border-slate-200 p-3'>
                 <ViewOnSpotifyButton />
               </div>
