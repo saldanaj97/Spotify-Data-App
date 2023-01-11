@@ -27,6 +27,7 @@ export function PlayOrPauseButton({ track }) {
     }
 
     // The user has pressed play on another preview without pressing pause on the old preview
+    oldPreview.pause();
     setOldPreview(currentPreview);
     setCurrentPreview(newPreview);
     currentPreview.play();
@@ -36,7 +37,7 @@ export function PlayOrPauseButton({ track }) {
 
   return (
     <div
-      className='play-pause-button absolute top-0 flex w-full bg-black bg-opacity-50'
+      className='play-pause-button absolute flex w-full bg-black bg-opacity-50'
       onClick={() => {
         let preview = document.getElementById(track.name);
         previewButtonPressed(preview);
@@ -93,10 +94,11 @@ export default function TopArtists({ artist }) {
   };
 
   // Create the list of the artists top 5 tracks
-  const ArtistsTopTracks = ({ track }) => {
+  const ArtistsTopTracks = ({ track, idx }) => {
     return (
       <div key={track.name} className='track m-1 flex flex-col justify-start'>
         <div className='relative flex flex-col'>
+          <p className='font-semibold'>{idx + 1}</p>
           <div className='track-album-buttons flex'>
             <AlbumCoverButtons track={track} />
           </div>
@@ -114,12 +116,12 @@ export default function TopArtists({ artist }) {
 
   return (
     <div className='discography-container m-2 flex flex-col justify-evenly p-5'>
-      <p className='top-songs-title text-left text-xl font-semibold'>Top Songs</p>
+      <p className='top-songs-title text-left text-xl font-semibold'>Current Hits</p>
       <div className='songs-container flex flex-row'>
-        {artistDiscography.map((track) => {
+        {artistDiscography.map((track, index) => {
           return (
             <div>
-              <ArtistsTopTracks track={track} />
+              <ArtistsTopTracks track={track} idx={index} />
             </div>
           );
         })}
