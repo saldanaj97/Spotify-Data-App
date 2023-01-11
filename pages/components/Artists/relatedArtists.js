@@ -59,8 +59,8 @@ export default function RelatedArtists({ artist }) {
     <div className='discography-container flex flex-col justify-evenly p-3'>
       <div className='similar-artists flex flex-row justify-around'>
         <div className='related-artist-container flex flex-col'>
-          <p className='text-left text-xl font-semibold'>Others also listen to</p>
-          <div className='artists-container flex flex-row'>
+          <p className='mb-2 text-left text-xl font-semibold'>Others also listen to</p>
+          <div className='artists-container mb-5 flex flex-row'>
             <RelatedArtists />
           </div>
         </div>

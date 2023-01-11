@@ -7,6 +7,7 @@ export function PlayOrPauseButton({ track }) {
   const [currentPreview, setCurrentPreview] = useState("");
   const [oldPreview, setOldPreview] = useState("");
 
+  // Function to handle playing/pausing songs
   const previewButtonPressed = (newPreview) => {
     /* ------- No preview currently playing -------- */
     // Update the currentPreview and currentlyPlaying states to the newPreview and true, respectively
@@ -73,6 +74,7 @@ export default function TopArtists({ artist }) {
     return artists;
   };
 
+  // Produce clickable album cover buttons for each song
   const AlbumCoverButtons = ({ track }) => {
     return (
       <button
