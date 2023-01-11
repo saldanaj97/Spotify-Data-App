@@ -15,16 +15,6 @@ export default function RelatedArtists({ artist }) {
     setRelatedArtists(artists);
   };
 
-  // Retrieve all artists on a track
-  const TrackArtists = ({ track }) => {
-    let artists = [];
-    track.artists.forEach((artist) => {
-      if (track.artists[track.artists.length - 1] !== artist) artists.push(artist.name + ", ");
-      if (track.artists[track.artists.length - 1] === artist) artists.push(artist.name);
-    });
-    return artists;
-  };
-
   // Get 5 random artists from the list of related artists with and make sure of no duplicates
   const generateFourRelatedArtists = () => {
     let artistsToDisplay = [];
