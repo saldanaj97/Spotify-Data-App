@@ -7,38 +7,53 @@ export function PlayOrPauseButton({ track }) {
   const [currentPreview, setCurrentPreview] = useState("");
   const [oldPreview, setOldPreview] = useState("");
 
+  const updatePlayingStatus = (playing) => {
+    return setCurrentlyPlayingPreview(playing);
+  };
+
+  const updateCurrentPreview = (preview) => {
+    return setCurrentPreview(preview);
+  };
+
   // Function to handle playing/pausing songs
   const previewButtonPressed = (newPreview) => {
     /* ------- No preview currently playing -------- */
     // Update the currentPreview and currentlyPlaying states to the newPreview and true, respectively
     if (!currentlyPlayingPreview) {
-      setCurrentPreview(newPreview);
-      setCurrentlyPlayingPreview(true);
+      updateCurrentPreview(newPreview);
+      console.log("nothjing playing start", newPreview.id, currentPreview.id);
+      updatePlayingStatus(true);
       newPreview.play();
       return;
     }
 
     /* ------ A preview is playing  ------- */
     // The user has pressed the pause button on the same preview to pause
-    if (newPreview == currentPreview) {
+    if (newPreview.id === currentPreview.id) {
+      console.log("same song pause", newPreview.id, currentPreview.id);
       newPreview.pause();
       newPreview.currentTime = 0;
-      setCurrentlyPlayingPreview(false);
+      updatePlayingStatus(false);
       return;
     }
 
     // The user has pressed play on another preview without pressing pause on the old preview
+    console.log("old song playing new song selected", newPreview.id, currentPreview.id);
+    updatePlayingStatus(false);
     oldPreview.pause();
     setOldPreview(currentPreview);
-    setCurrentPreview(newPreview);
+
+    updateCurrentPreview(newPreview);
     currentPreview.play();
+    updatePlayingStatus(true);
+    return;
 
     //setTimeout(previewCompleted, 30000);
   };
 
   return (
     <button
-      className='play-pause-button absolute flex w-full bg-black bg-opacity-0 text-black transition-all duration-300 ease-in-out hover:bg-opacity-50 hover:text-white'
+      className='play-pause-button absolute flex w-full bg-black bg-opacity-0 text-white transition-all duration-300 ease-in-out hover:bg-opacity-50'
       onClick={() => {
         let preview = document.getElementById(track.name);
         previewButtonPressed(preview);
@@ -55,7 +70,6 @@ export function PlayOrPauseButton({ track }) {
 
 export default function TopArtists({ artist }) {
   const [artistDiscography, setArtistDiscography] = useState([]);
-  const [previewBeingHovered, setPreviewBeingHovered] = useState(false);
 
   useEffect(() => {
     getDiscography();
@@ -80,6 +94,7 @@ export default function TopArtists({ artist }) {
 
   // Produce clickable album cover buttons for each song
   const AlbumCoverButtons = ({ track }) => {
+    const [previewBeingHovered, setPreviewBeingHovered] = useState(false);
     return (
       <button
         className='flex'
