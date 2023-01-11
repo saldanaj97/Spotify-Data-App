@@ -115,7 +115,7 @@ export default function TopArtists({ artist }) {
   };
 
   return (
-    <div className='discography-container m-2 flex flex-col justify-evenly p-5'>
+    <div className='discography-container flex flex-col justify-evenly p-3'>
       <p className='top-songs-title text-left text-xl font-semibold'>Current Hits</p>
       <div className='songs-container flex flex-row'>
         {artistDiscography.map((track, index) => {
