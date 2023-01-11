@@ -47,7 +47,7 @@ export function PlayOrPauseButton({ track }) {
       {currentlyPlayingPreview ? (
         <BsPauseFill className='h-full w-full transition-all duration-300 ease-in-out hover:scale-110' />
       ) : (
-        <BsPlayFill className='h-full w-full ' />
+        <BsPlayFill className='h-full w-full transition-all duration-300 ease-in-out hover:scale-110' />
       )}
     </button>
   );
