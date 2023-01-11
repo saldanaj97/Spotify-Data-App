@@ -37,15 +37,19 @@ export function PlayOrPauseButton({ track }) {
   };
 
   return (
-    <div
-      className='play-pause-button absolute flex w-full bg-black bg-opacity-50'
+    <button
+      className='play-pause-button absolute flex w-full bg-black bg-opacity-0 text-black transition-all duration-300 ease-in-out hover:bg-opacity-50 hover:text-white'
       onClick={() => {
         let preview = document.getElementById(track.name);
         previewButtonPressed(preview);
       }}
     >
-      {currentlyPlayingPreview ? <BsPauseFill className='h-full w-full text-white' /> : <BsPlayFill className='h-full w-full text-white' />}
-    </div>
+      {currentlyPlayingPreview ? (
+        <BsPauseFill className='h-full w-full transition-all duration-300 ease-in-out hover:scale-110' />
+      ) : (
+        <BsPlayFill className='h-full w-full ' />
+      )}
+    </button>
   );
 }
 
