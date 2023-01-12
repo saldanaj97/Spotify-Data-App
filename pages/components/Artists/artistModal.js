@@ -13,7 +13,7 @@ const convertCasing = (word) => {
   return newWord;
 };
 
-export default function ArtistInfoModal({ showModal, setShowModal, artist, artistDetails }) {
+export default function ArtistInfoModal({ showModal, artist, artistDetails }) {
   // Generate pill shaped containers with the genres the artist falls under
   const GenrePills = () => {
     return (
