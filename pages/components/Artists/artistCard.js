@@ -41,7 +41,7 @@ export default function ArtistCard({ artist }) {
           </div>
         </div>
       </button>
-      <ArtistInfoModal showModal={showModal} artist={artist} artistDetails={artistDetails} />
+      <ArtistInfoModal showModal={showModal} setShowModal={setShowModal} artist={artist} artistDetails={artistDetails} />
     </div>
   );
 }
